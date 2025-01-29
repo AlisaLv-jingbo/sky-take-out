@@ -114,5 +114,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(p.getTotal(), p.getResult());
     }
 
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .id(id)
+                .status(status)
+                .updateTime(LocalDateTime.now())
+                .build();
+
+
+        String token = request.getHeader(jwtProperties.getAdminTokenName());
+        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
+        Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+
+        employee.setUpdateUser(empId);
+
+        employeeMapper.update(employee);
+    }
+
 
 }
