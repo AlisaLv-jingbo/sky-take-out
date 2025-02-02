@@ -1,5 +1,6 @@
 package com.sky.utils;
 
+import com.sky.constant.JwtClaimsConstant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -53,6 +54,12 @@ public class JwtUtil {
                 // 设置需要解析的jwt
                 .parseClaimsJws(token).getBody();
         return claims;
+    }
+
+
+    public static long getUserId(String secretKey, String token) {
+        Claims claims = parseJWT(secretKey, token);
+        return Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
     }
 
 }

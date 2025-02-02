@@ -91,8 +91,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 //        根据jwt获取登录者相关信息 TODO
         String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
-        Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
 
         employee.setCreateUser(empId);
         employee.setUpdateUser(empId);
@@ -124,8 +123,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
         String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
-        Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
 
         employee.setUpdateUser(empId);
 
@@ -147,8 +145,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdateTime(LocalDateTime.now());
 
         String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
-        Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+//        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
+        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
 
         employee.setUpdateUser(empId);
 
