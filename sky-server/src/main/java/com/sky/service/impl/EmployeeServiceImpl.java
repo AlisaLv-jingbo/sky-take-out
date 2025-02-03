@@ -86,15 +86,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        设置相关属性，状态，默认密码,创建时间等
         employee.setStatus(StatusConstant.ENABLE);
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
 
 //        根据jwt获取登录者相关信息 TODO
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
-
-        employee.setCreateUser(empId);
-        employee.setUpdateUser(empId);
+//        String token = request.getHeader(jwtProperties.getAdminTokenName());
+//        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
+//
+//        employee.setCreateUser(empId);
+//        employee.setUpdateUser(empId);
 
 
         employeeMapper.insert(employee);
@@ -118,14 +118,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = Employee.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
+//                .updateTime(LocalDateTime.now())
                 .build();
 
 
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
-
-        employee.setUpdateUser(empId);
+//        String token = request.getHeader(jwtProperties.getAdminTokenName());
+//        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
+//
+//        employee.setUpdateUser(empId);
 
         employeeMapper.update(employee);
     }
@@ -142,13 +142,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
 
-        employee.setUpdateTime(LocalDateTime.now());
-
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
-//        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
-        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
-
-        employee.setUpdateUser(empId);
+//        employee.setUpdateTime(LocalDateTime.now());
+//
+//        String token = request.getHeader(jwtProperties.getAdminTokenName());
+////        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
+//        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
+//
+//        employee.setUpdateUser(empId);
 
         employeeMapper.update(employee);
     }

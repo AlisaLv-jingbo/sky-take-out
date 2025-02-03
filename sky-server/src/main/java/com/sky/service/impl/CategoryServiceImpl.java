@@ -47,16 +47,16 @@ public class CategoryServiceImpl implements CategoryService {
     public void save(CategoryDTO categoryDTO) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO, category);
-        category.setCreateTime(LocalDateTime.now());
-        category.setUpdateTime(LocalDateTime.now());
+//        category.setCreateTime(LocalDateTime.now());
+//        category.setUpdateTime(LocalDateTime.now());
         category.setStatus(0);
 
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
-//        Long userId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
-
-        category.setCreateUser(empId);
-        category.setUpdateUser(empId);
+//        String token = request.getHeader(jwtProperties.getAdminTokenName());
+//        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
+////        Long userId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+//
+//        category.setCreateUser(empId);
+//        category.setUpdateUser(empId);
 
         categoryMapper.insert(category);
     }
@@ -92,12 +92,12 @@ public class CategoryServiceImpl implements CategoryService {
     public void update(CategoryDTO categoryDTO) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO, category);
-        category.setUpdateTime(LocalDateTime.now());
-
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
-
-        category.setUpdateUser(empId);
+//        category.setUpdateTime(LocalDateTime.now());
+//
+//        String token = request.getHeader(jwtProperties.getAdminTokenName());
+//        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
+//
+//        category.setUpdateUser(empId);
 
         categoryMapper.update(category);
 
@@ -108,13 +108,13 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
+//                .updateTime(LocalDateTime.now())
                 .build();
 
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
-        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
+//        String token = request.getHeader(jwtProperties.getAdminTokenName());
+//        Long empId = JwtUtil.getUserId(jwtProperties.getAdminSecretKey(), token);
 
-        category.setUpdateUser(empId);
+//        category.setUpdateUser(empId);
 
         categoryMapper.update(category);
     }
