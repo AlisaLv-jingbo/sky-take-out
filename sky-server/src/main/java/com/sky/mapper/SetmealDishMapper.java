@@ -15,7 +15,8 @@ public interface SetmealDishMapper {
 
     List<Long> getSetmealIdsByDishIds(List<Long> ids);
 
-
+    @Select("select setmeal_id from sky_take_out.setmeal_dish where dish_id=#{id}")
+    List<Long> getSetmealIdsByDishId(Long id);
 
 
 }
