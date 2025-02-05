@@ -22,6 +22,14 @@
         </set>
         where id = #{id}
     </update>
+
+    <delete id="deleteBatch">
+        delete from sky_take_out.setmeal where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
     <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
         select s.*,c.name as categoryName from sky_take_out.setmeal s
         left join sky_take_out.category c on s.category_id = c.id
@@ -37,5 +45,11 @@
             </if>
         </where>
         order by s.create_time desc
+    </select>
+    <select id="queryStatus" resultType="java.lang.Integer">
+        select count(*) from sky_take_out.setmeal where status = 0 and id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </select>
 </mapper>

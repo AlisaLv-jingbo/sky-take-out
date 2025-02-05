@@ -6,11 +6,14 @@ import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.SetmealService;
+import com.sky.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -45,6 +48,61 @@ public class SetmealController {
         log.info("分页查询套餐：{}", setmealPageQueryDTO);
         PageResult pageResult = setmealService.pageQuery(setmealPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 根据id删除套餐  支持批量删除
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("删除套餐")
+    public Result delete(@RequestParam List<Long> ids) {
+        log.info("批量删除套餐：{}", ids);
+        setmealService.deleteBatch(ids);
+        return Result.success();
+    }
+
+
+    /**
+     * 根据id查询套餐
+     *
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询套餐")
+    public Result<SetmealVO> getByID(@PathVariable long id) {
+        log.info("根据id查询套餐：{}", id);
+        SetmealVO setmealVO = setmealService.getById(id);
+        return Result.success(setmealVO);
+    }
+
+
+    /**
+     * 更新修改套餐
+     * @param setmealDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("更新套餐")
+    public Result update(@RequestBody SetmealDTO setmealDTO) {
+        log.info("更新套餐：{}", setmealDTO);
+        setmealService.update(setmealDTO);
+        return Result.success();
+    }
+
+
+    /**
+     * 更新套餐售卖状态 起售、停售
+     * @param ids
+     * @param status
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("更新套餐状态")
+    public Result stopOrStart(@PathVariable Integer status,Long id) {
+        log.info("更新套餐状态：{}", id);
+        setmealService.stopOrStart(status,id);
+        return Result.success();
     }
 
 }

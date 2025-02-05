@@ -5,6 +5,7 @@ import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.SetmealVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -36,4 +37,12 @@ public interface SetmealMapper {
     void save(Setmeal setmeal);
 
     List<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    int queryStatus(List<Long> ids);
+
+
+    void deleteBatch(List<Long> ids);
+
+    @Select("select * from sky_take_out.setmeal where id=#{id}")
+    Setmeal getById(long id);
 }
