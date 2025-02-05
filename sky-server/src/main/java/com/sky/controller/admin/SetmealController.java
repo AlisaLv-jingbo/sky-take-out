@@ -93,7 +93,7 @@ public class SetmealController {
 
     /**
      * 更新套餐售卖状态 起售、停售
-     * @param ids
+     * @param
      * @param status
      * @return
      */
