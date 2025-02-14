@@ -53,7 +53,7 @@
         </foreach>
     </select>
     <select id="list" resultType="com.sky.entity.Setmeal">
-        select * from setmeal
+        select * from sky_take_out.setmeal
         <where>
             <if test="name != null">
                 and name like concat('%',#{name},'%')
@@ -63,6 +63,17 @@
             </if>
             <if test="status != null">
                 and status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from sky_take_out.setmeal
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
             </if>
         </where>
     </select>
